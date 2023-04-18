@@ -9,22 +9,22 @@ struct SYM {
     int prior;
 };
 
-bool PredicForMyListPrior(SYM &value1, SYM &value2) {
+bool PredicForMyListPrior(const SYM &value1, const SYM &value2) {
     return value1.prior > value2.prior;
 }
 
-bool PredicForMyListCh(SYM &value1, SYM &value2) {
+bool PredicForMyListCh(const SYM &value1, const SYM &value2) {
     return value1.ch < value2.ch;
 }
 
 template<typename T>
 class TPQueue {
-private:
-    list <T> myList;
+ private:
+    std::list <T> myList;
     int head;
     T FirstCopy;
 
-public:
+ public:
     TPQueue() {
         head = -1;
     }

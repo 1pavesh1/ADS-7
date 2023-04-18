@@ -9,15 +9,20 @@ struct SYM {
     int prior;
 };
 
-bool PredicForMyList(const SYM &value1, const SYM &value2) {
+bool PredicForMyListPrior(SYM &value1, SYM &value2) {
     return value1.prior > value2.prior;
+}
+
+bool PredicForMyListCh(SYM &value1, SYM &value2) {
+    return value1.ch < value2.ch;
 }
 
 template<typename T>
 class TPQueue {
 private:
-    std::list <T> myList;
+    list <T> myList;
     int head;
+    T FirstCopy;
 
 public:
     TPQueue() {
@@ -28,8 +33,14 @@ public:
             myList.push_front(value);
             head += 1;
         } else {
-            myList.push_front(value);
-            myList.sort(PredicForMyList);
+            FirstCopy = myList.front();
+            if (FirstCopy.prior == value.prior) {
+                myList.push_front(value);
+                myList.sort(PredicForMyListCh);
+            } else {
+                myList.push_front(value);
+                myList.sort(PredicForMyListPrior);
+            }
             head += 1;
         }
     }
